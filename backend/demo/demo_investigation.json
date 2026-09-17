@@ -1,0 +1,44 @@
+{
+  "investigation_data": {
+    "subject": "Urgent: Verify your account",
+    "sender": "security@bank-example.com",
+    "threat_score": 85,
+    "threat_level": "HIGH",
+    "summary": "Demo investigation of a phishing email."
+  },
+  "threat_score": 85,
+  "threat_level": "HIGH",
+  "evidence": [
+    {"evidence_type": "Authentication", "source": "Received-SPF", "detail": "SPF fail/missing", "confidence": 0.8},
+    {"evidence_type": "Header", "source": "Reply-To", "detail": "From: security@bank-example.com, Reply-To: support@malicious.com", "confidence": 0.9},
+    {"evidence_type": "Content", "source": "Body", "detail": "Keywords: urgent, verify, account", "confidence": 0.85}
+  ],
+  "explanation": [
+    "SPF check failed or missing",
+    "Reply‑To address differs from From address (possible spoof)",
+    "Found suspicious keywords: urgent, verify, account"
+  ],
+  "timeline": [
+    {"event": "Email Received", "time": "2026-09-01T08:12:00Z"},
+    {"event": "Header Parsed", "time": "2026-09-01T08:12:01Z"},
+    {"event": "Content Scored", "time": "2026-09-01T08:12:02Z"}
+  ],
+  "graph": {
+    "nodes": [
+      {"id": "email", "label": "Email"},
+      {"id": "sender", "label": "security@bank-example.com"},
+      {"id": "domain", "label": "bank-example.com"},
+      {"id": "urls", "label": "malicious.com"}
+    ],
+    "edges": [
+      {"from": "email", "to": "sender"},
+      {"from": "sender", "to": "domain"},
+      {"from": "email", "to": "urls"}
+    ]
+  },
+  "geolocation": {
+    "region": "North America",
+    "confidence": 0.6,
+    "notes": "Inferred from domain TLD."
+  }
+}
